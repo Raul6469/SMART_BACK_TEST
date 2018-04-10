@@ -1,4 +1,4 @@
-package hello;
+package smart.Entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,11 +38,11 @@ public class User {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPassword(){
         return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
