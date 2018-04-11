@@ -1,16 +1,17 @@
 package smart.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.*;
 import smart.Entities.Authority;
 import smart.Entities.User;
 import smart.Jwt.JwtTokenUtil;
 import smart.Jwt.JwtUser;
 import smart.Repositories.UserRepository;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -44,8 +45,8 @@ public class MainController {
         return user;
     }
 
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<User> getAllUsers() {
+    @RequestMapping(path="/all", method = RequestMethod.GET)
+    public Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
         User n = new User();
         n.setUsername("user");

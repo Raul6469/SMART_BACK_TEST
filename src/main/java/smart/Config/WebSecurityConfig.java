@@ -1,5 +1,10 @@
 package smart.Config;
 
+import smart.Jwt.JwtAuthenticationEntryPoint;
+import smart.Jwt.JwtAuthorizationTokenFilter;
+import smart.Jwt.JwtTokenUtil;
+import smart.Services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +21,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import smart.Jwt.JwtAuthenticationEntryPoint;
-import smart.Jwt.JwtAuthorizationTokenFilter;
-import smart.Jwt.JwtTokenUtil;
-import smart.Services.UserService;
-
 
 @Configuration
 @EnableWebSecurity
@@ -73,9 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
 
-                // Un-secure H2 Database
-                .antMatchers("/h2-console/**/**").permitAll()
-
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/all").permitAll()
                 .anyRequest().authenticated();
@@ -113,11 +110,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js"
-                )
-
-                // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
-                .and()
-                .ignoring()
-                .antMatchers("/h2-console/**/**");
+                );
     }
 }

@@ -1,5 +1,11 @@
 package smart.Controller.Security;
 
+import smart.Exceptions.AuthenticationException;
+import smart.Jwt.JwtAuthenticationRequest;
+import smart.Jwt.JwtAuthenticationResponse;
+import smart.Jwt.JwtTokenUtil;
+import smart.Jwt.JwtUser;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,11 +18,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-import smart.Exceptions.AuthenticationException;
-import smart.Jwt.JwtAuthenticationRequest;
-import smart.Jwt.JwtAuthenticationResponse;
-import smart.Jwt.JwtTokenUtil;
-import smart.Jwt.JwtUser;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -37,11 +38,10 @@ public class AuthenticationController {
     @Qualifier("userService")
     private UserDetailsService userDetailsService;
 
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
-        System.out.println("here");
-
+        // Authenticate the user throws exception if not able to to authenticate
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         // Reload password post-security so we can generate the token
