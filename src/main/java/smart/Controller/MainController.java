@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
+import smart.Entities.Authority;
 import smart.Entities.User;
 import smart.Jwt.JwtTokenUtil;
 import smart.Jwt.JwtUser;
@@ -12,6 +13,11 @@ import smart.Repositories.UserRepository;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static smart.Entities.AuthorityName.ROLE_USER;
 
 @RestController
 public class MainController {
@@ -30,7 +36,7 @@ public class MainController {
     @Qualifier("userService")
     private UserDetailsService userDetailsService;
 
-    @RequestMapping(value = "user", method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader).substring(7);
         String username = jwtTokenUtil.getUsernameFromToken(token);
@@ -41,6 +47,20 @@ public class MainController {
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
+        User n = new User();
+        n.setUsername("user");
+        n.setPassword("$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC");
+        n.setEnabled(true);
+        n.setEmail("user@mail");
+        n.setFirstname("firstUser");
+        n.setLastname("lastname");
+        List<Authority> authorities = new ArrayList<Authority>();
+        Authority a = new Authority();
+        a.setName(ROLE_USER);
+        authorities.add(a);
+        n.setAuthorities(authorities);
+        n.setLastPasswordResetDate(new Date(10));
+        userRepository.save(n);
         return userRepository.findAll();
     }
 

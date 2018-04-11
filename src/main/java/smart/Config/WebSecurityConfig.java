@@ -92,32 +92,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cacheControl();
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exceptions {
-//        // AuthenticationTokenFilter will ignore the below paths
-//        web
-//                .ignoring()
-//                .antMatchers(
-//                        HttpMethod.POST,
-//                        authenticationPath
-//                )
-//
-//                // allow anonymous resource requests
-//                .and()
-//                .ignoring()
-//                .antMatchers(
-//                        HttpMethod.GET,
-//                        "/",
-//                        "/*.html",
-//                        "/favicon.ico",
-//                        "/**/*.html",
-//                        "/**/*.css",
-//                        "/**/*.js"
-//                )
-//
-//                // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
-//                .and()
-//                .ignoring()
-//                .antMatchers("/h2-console/**/**");
-//    }
+    @Override
+    public void configure(WebSecurity web) {
+        // AuthenticationTokenFilter will ignore the below paths
+        web
+                .ignoring()
+                .antMatchers(
+                        HttpMethod.POST,
+                        authenticationPath
+                )
+
+                // allow anonymous resource requests
+                .and()
+                .ignoring()
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/",
+                        "/*.html",
+                        "/favicon.ico",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js"
+                )
+
+                // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
+                .and()
+                .ignoring()
+                .antMatchers("/h2-console/**/**");
+    }
 }

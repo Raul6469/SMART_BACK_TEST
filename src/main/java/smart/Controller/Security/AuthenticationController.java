@@ -11,10 +11,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import smart.Exceptions.AuthenticationException;
 import smart.Jwt.JwtAuthenticationRequest;
 import smart.Jwt.JwtAuthenticationResponse;
@@ -24,6 +21,7 @@ import smart.Jwt.JwtUser;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
+@RestController
 public class AuthenticationController {
 
     @Value("${jwt.header}")
@@ -36,11 +34,13 @@ public class AuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    @Qualifier("jwtUserDetailsService")
+    @Qualifier("userService")
     private UserDetailsService userDetailsService;
 
-    @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+
+        System.out.println("here");
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
