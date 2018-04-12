@@ -1,7 +1,5 @@
 package smart.Validation;
 
-import org.apache.tomcat.util.log.SystemLogHandler;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
