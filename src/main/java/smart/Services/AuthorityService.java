@@ -3,8 +3,6 @@ package smart.Services;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import smart.Entities.Authority;
-import smart.Entities.User;
-import smart.Jwt.JwtUserFactory;
 import smart.Repositories.AuthoRepository;
 
 
