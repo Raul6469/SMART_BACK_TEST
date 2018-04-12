@@ -1,7 +1,7 @@
 package smart.Jwt;
 
-
 import smart.Entities.User;
+import smart.Repositories.AuthoRepository;
 import smart.Repositories.UserRepository;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private AuthoRepository authoRepository;
 
     @Autowired
     private UserRepository userRepository;
