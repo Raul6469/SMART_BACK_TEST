@@ -41,7 +41,7 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(path="/all", method = RequestMethod.GET)
+    @RequestMapping(path="/user/all", method = RequestMethod.GET)
     public Iterable<User> getAllUsers() throws ParseException {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
