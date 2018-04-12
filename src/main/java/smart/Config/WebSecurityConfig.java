@@ -3,7 +3,7 @@ package smart.Config;
 import smart.Jwt.JwtAuthenticationEntryPoint;
 import smart.Jwt.JwtAuthorizationTokenFilter;
 import smart.Jwt.JwtTokenUtil;
-import smart.Services.UserService;
+import smart.Jwt.JwtUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserService userService;
+    private JwtUserDetailsService userService;
 
     @Value("${jwt.header}")
     private String tokenHeader;

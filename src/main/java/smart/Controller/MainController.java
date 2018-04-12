@@ -1,13 +1,12 @@
 package smart.Controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import smart.Entities.User;
 import smart.Jwt.JwtTokenUtil;
 import smart.Jwt.JwtUser;
-import smart.Repositories.AuthoRepository;
 import smart.Repositories.UserRepository;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +31,7 @@ public class MainController {
     
 
     @Autowired
-    @Qualifier("userService")
+    @Qualifier("jwtUserDetailsService")
     private UserDetailsService userDetailsService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
