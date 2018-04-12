@@ -1,5 +1,7 @@
 package smart.Controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import smart.Entities.User;
 import smart.Jwt.JwtTokenUtil;
 import smart.Jwt.JwtUser;
@@ -45,6 +47,17 @@ public class MainController {
     public Iterable<User> getAllUsers() throws ParseException {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
+    }
+
+    /**
+     * This is an example of some different kinds of granular restriction for endpoints. You can use the built-in SPEL expressions
+     * in @PreAuthorize such as 'hasRole()' to determine if a user has access. Remember that the hasRole expression assumes a
+     * 'ROLE_' prefix on all role names. So 'ADMIN' here is actually stored as 'ROLE_ADMIN' in database!
+     **/
+    @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getProtectedGreeting() {
+        return ResponseEntity.ok("Greetings from admin protected method!");
     }
 
 }
