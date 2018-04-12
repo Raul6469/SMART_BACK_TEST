@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.text.ParseException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8100" )
 public class UserController {
 
     @Value("${jwt.header}")
@@ -45,6 +46,7 @@ public class UserController {
         JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
         return user;
     }
+
 
     @RequestMapping(path="/user/all", method = RequestMethod.GET)
     public Iterable<User> getAllUsers() throws ParseException {
