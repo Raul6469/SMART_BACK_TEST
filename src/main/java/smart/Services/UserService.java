@@ -1,6 +1,7 @@
 package smart.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import smart.DTO.UserDto;
 import smart.Entities.User;
@@ -22,6 +23,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public User addUser(UserDto userDto) throws EmailExistsException {
         if (emailExist(userDto.getEmail())) {
             throw new EmailExistsException(
@@ -35,6 +39,7 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         user.setUsername(userDto.getUsername());
         Date date = java.util.Calendar.getInstance().getTime();
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setLastPasswordResetDate(date);
         user.setEnabled(true);
         user.setAuthorities(Arrays.asList(authoRepository.findById(1)));
