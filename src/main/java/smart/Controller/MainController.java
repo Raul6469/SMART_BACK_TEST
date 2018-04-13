@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:8100" )
 public class MainController {
@@ -19,5 +18,4 @@ public class MainController {
     public ResponseEntity<?> getProtectedGreeting() {
         return ResponseEntity.ok("Greetings from admin protected method!");
     }
-
 }
