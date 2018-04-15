@@ -68,5 +68,7 @@ public class UserDto {
         this.email = email;
     }
 
-    // standard getters and setters
+    public String toString(){
+        return username + " " + password + " " + firstname + " " + lastname + " " + email;
+    }
 }
