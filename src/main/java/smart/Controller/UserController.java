@@ -55,14 +55,7 @@ public class UserController {
     }
 
     @RequestMapping(path="/user/add", method = RequestMethod.POST)
-    @ResponseBody
-    public JwtUser addUser(@Valid UserDto userDto, HttpServletRequest request) {
-       /* UserDto userDto = new UserDto();
-        userDto.setEmail(registrationRequest.getEmail());
-        userDto.setFirstname(registrationRequest.getFirstname());
-        userDto.setLastname(registrationRequest.getLastname());
-        userDto.setPassword(registrationRequest.getPassword());
-        userDto.setUsername(registrationRequest.getUsername());*/
+    public JwtUser addUser(@RequestBody @Valid UserDto userDto, HttpServletRequest request) {
         User user = userService.addUser(userDto);
         return JwtUserFactory.create(user);
     }
