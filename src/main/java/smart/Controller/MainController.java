@@ -18,4 +18,9 @@ public class MainController {
     public ResponseEntity<?> getProtectedGreeting() {
         return ResponseEntity.ok("Greetings from admin protected method!");
     }
+
+    @RequestMapping(path="/hello", method = RequestMethod.GET)
+    public ResponseEntity<?> greetings() {
+        return ResponseEntity.ok("Ok");
+    }
 }

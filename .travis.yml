@@ -7,9 +7,9 @@ services:
   - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE spring;'
-  - mysql -e "create user 'springuser'@'localhost' identified by 'password'"
-  - mysql -e "grant all on spring.* to 'springuser'@'localhost' identified by 'password'"
+  - mysql -e 'CREATE DATABASE db_example;'
+  - mysql -e "create user 'spring'@'localhost' identified by 'password'"
+  - mysql -e "grant all on db_example.* to 'spring'@'localhost' identified by 'password'"
 
 cache:
   directories:
